@@ -28,7 +28,12 @@ Copy `.env.example` to `.env` and set the application key:
 ```sh
 php artisan key:generate
 ```
-then start the Docker container (detached) with Sail:
+Set the required app key and secret for Reverb (these are two strings of letters/numbers, 20 characters long):
+```env
+REVERB_APP_KEY=
+REVERB_APP_SECRET=
+```
+Start the Docker container (detached) with Sail:
 ```sh
 ./vendor/bin/sail up -d
 ```
