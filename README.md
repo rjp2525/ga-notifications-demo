@@ -21,7 +21,7 @@ git clone git@github.com:rjp2525/ga-notifications-demo
 Open a terminal instance within the cloned directory, then install dependencies for PHP + JS
 ```sh
 composer install
-npm i
+npm i && npm run build
 ```
 
 Copy `.env.example` to `.env` and set the application key:
