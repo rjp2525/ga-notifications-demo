@@ -1,16 +1,35 @@
 <script setup lang="ts">
+import AnnouncementToast from '@/components/AnnouncementToast.vue';
 import ApplicationLogo from '@/components/ApplicationLogo.vue';
 import Dropdown from '@/components/Dropdown.vue';
 import DropdownLink from '@/components/DropdownLink.vue';
 import NavLink from '@/components/NavLink.vue';
 import ResponsiveNavLink from '@/components/ResponsiveNavLink.vue';
-import { Link } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { Toaster } from '@/components/ui/sonner';
+import { Link, router, usePage } from '@inertiajs/vue3';
+import { h, ref } from 'vue';
+import { toast } from 'vue-sonner';
 
 const showingNavigationDropdown = ref(false);
+const uid = usePage().props.auth.user.id;
+window.Echo.private(`users.${uid}`).notification((notification: any) => {
+    toast('New Announcement', {
+        description: h(AnnouncementToast, {
+            title: notification.title,
+            author: notification.author_name,
+            date: notification.posted,
+        }),
+    });
+
+    router.reload({
+        only: ['unread_notifications', 'unread_announcements'],
+        replace: true,
+    });
+});
 </script>
 
 <template>
+    <Toaster />
     <div>
         <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav
@@ -61,6 +80,10 @@ const showingNavigationDropdown = ref(false);
                                     />
                                 </svg>
                                 <span
+                                    v-if="
+                                        $page.props.unread_notifications
+                                            .length > 0
+                                    "
                                     class="absolute right-0.5 top-1 block h-1 w-1 animate-ping rounded-full bg-green-600 ring-2 ring-green-400"
                                 ></span>
                             </button>
@@ -68,11 +91,12 @@ const showingNavigationDropdown = ref(false);
                                 class="ms-3"
                                 v-if="$page.props.auth.user.is_admin"
                             >
-                                <button
+                                <Link
                                     class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-400 dark:hover:text-gray-300"
+                                    :href="route('announcement.create')"
                                 >
                                     New
-                                </button>
+                                </Link>
                             </div>
                             <!-- Settings Dropdown -->
                             <div class="relative ms-3">

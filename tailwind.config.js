@@ -1,4 +1,5 @@
 import forms from '@tailwindcss/forms';
+import typography from '@tailwindcss/typography';
 import animate from 'tailwindcss-animate';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
@@ -39,5 +40,5 @@ module.exports = {
             },
         },
     },
-    plugins: [animate, forms],
+    plugins: [animate, forms, typography],
 };
