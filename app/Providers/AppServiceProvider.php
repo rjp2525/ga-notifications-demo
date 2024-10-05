@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,5 +22,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Vite::prefetch(concurrency: 3);
+
+        /**
+         * Performance sanity check for development. Prevents:
+         * - Lazy loading model relationships
+         * - Silently discarding model attributes
+         * - Accessing missing model attributes
+         **/
+        Model::shouldBeStrict(! $this->app->isProduction());
     }
 }
