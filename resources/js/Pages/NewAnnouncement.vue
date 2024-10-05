@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import InputError from '@/components/InputError.vue';
-import InputLabel from '@/components/InputLabel.vue';
-import PrimaryButton from '@/components/PrimaryButton.vue';
-import TextAreaInput from '@/components/TextAreaInput.vue';
-import TextInput from '@/components/TextInput.vue';
+import {
+    InputError,
+    InputLabel,
+    PrimaryButton,
+    TextareaInput,
+    TextInput,
+} from '@/components';
 import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
@@ -57,7 +59,7 @@ const form = useForm({
                         <div>
                             <InputLabel for="body" value="Markdown Content" />
 
-                            <TextAreaInput
+                            <TextareaInput
                                 id="body"
                                 type="text"
                                 class="mt-1 block w-full"

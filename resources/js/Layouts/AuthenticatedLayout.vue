@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import AnnouncementToast from '@/components/AnnouncementToast.vue';
-import ApplicationLogo from '@/components/ApplicationLogo.vue';
-import Dropdown from '@/components/Dropdown.vue';
-import DropdownLink from '@/components/DropdownLink.vue';
-import NavLink from '@/components/NavLink.vue';
-import ResponsiveNavLink from '@/components/ResponsiveNavLink.vue';
+import {
+    AnnouncementToast,
+    ApplicationLogo,
+    Dropdown,
+    DropdownLink,
+    NavLink,
+    ResponsiveNavLink,
+} from '@/components';
 import { Toaster } from '@/components/ui/sonner';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import { h, ref } from 'vue';

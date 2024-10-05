@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AuthenticatedLayout from '@/layouts/AuthenticatedLayout.vue';
+import { AuthenticatedLayout } from '@/layouts';
 import type { Announcement } from '@/types';
 import { Head } from '@inertiajs/vue3';
 
@@ -32,7 +32,7 @@ defineProps<{
                     class="overflow-hidden bg-white shadow-sm sm:rounded-lg dark:bg-gray-800"
                 >
                     <div
-                        class="prose dark:prose-invert p-6 text-gray-900 dark:text-gray-100"
+                        class="prose p-6 text-gray-900 dark:prose-invert dark:text-gray-100"
                     >
                         <div v-html="announcement.body"></div>
                     </div>

@@ -12,7 +12,7 @@ import type { PaginatedAnnouncements } from '@/types';
 import { Head, Link } from '@inertiajs/vue3';
 import moment from 'moment';
 
-const props = defineProps<{
+defineProps<{
     unread_announcements: PaginatedAnnouncements;
     past_announcements: PaginatedAnnouncements;
 }>();
