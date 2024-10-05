@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Announcement;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -12,15 +13,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('announcement_user', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug')->unique()->index();
-            $table->text('body');
             $table->foreignIdFor(User::class, 'user_id')
                 ->constrained()
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
+                ->onDelete('cascade');
+            $table->foreignIdFor(Announcement::class, 'announcement_id')
+                ->constrained()
+                ->onDelete('cascade');
+            $table->timestamp('viewed_at')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('announcements');
+        Schema::dropIfExists('announcement_user');
     }
 };
